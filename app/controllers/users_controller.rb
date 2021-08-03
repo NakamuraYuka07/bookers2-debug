@@ -33,6 +33,16 @@ class UsersController < ApplicationController
   def user_params
     params.require(:user).permit(:name, :introduction, :profile_image)
   end
+  
+  def follow(user_id)
+    relationships.create(followed_id: user_id)
+  end
+  def unfollow(user_id)
+    relationships.find_by(followed_id: user_id).destroy
+  end
+  def following?(user)
+    followings.include?(user)
+  end
 
   def ensure_correct_user
     @user = User.find(params[:id])
