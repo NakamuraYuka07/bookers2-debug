@@ -10,6 +10,22 @@
   </head>
   <body>
     <%= render 'layouts/header' %>
+    <header>
+<div class="row">
+      <div class="text-center col-12">
+ <% if user_signed_in? %>
+   <div class="search-form">
+      <%= form_with url: search_path, method: :get, local: true do |f| %>
+        <%= f.text_field :keyword %>
+        <%= f.select :search_model, [["User","User"],["Book","Book"]]%>
+        <%= f.select :search_method, [["完全一致","perfect_match"],["前方一致","forward_match"], ["後方一致","backward_match"],["部分一致","partial_match"]] %>
+        <%= f.submit "検索" %>
+      <% end %>
+    </div>
+ <% end %>
+      </div>
+      </div>
+    </header>
       <main>
         <p id="notice"><%= notice %></p>
         <%= yield %>
