@@ -19,7 +19,7 @@ class User < ApplicationRecord
   has_many :followers, through: :followed, source: :follower
   
   def already_favorited?(book)
-    self.favorites.exists?(book_id: book.id)
+    self.favorites.exists?(book_id: book)
   end
   
   def follow(user_id)
