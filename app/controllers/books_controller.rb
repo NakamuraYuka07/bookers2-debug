@@ -9,7 +9,7 @@ class BooksController < ApplicationController
 
   def index
     @book_new = Book.new
-    @books = Book.all
+    @books = Book.includes(:user).sort {|a,b| b.favorites.where("created_at > ?", 7.day.ago).size <=> a.favorites.where("created_at > ?", 7.day.ago).size}
     @user = current_user
   end
 
